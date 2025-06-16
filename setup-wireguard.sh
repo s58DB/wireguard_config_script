@@ -71,3 +71,11 @@ if [[ "$START_NOW" =~ ^[Yy]$ ]]; then
 else
   echo "You can start the VPN manually with: sudo wg-quick up wg0"
 fi
+
+read -p "Enable WireGuard autostart on boot? (y/n): " ENABLE_BOOT
+if [[ "$ENABLE_BOOT" =~ ^[Yy]$ ]]; then
+  systemctl enable wg-quick@wg0
+  echo "Autostart enabled: WireGuard will start at boot."
+else
+  echo "Autostart not enabled: you will need to start VPN manually after reboot."
+fi
